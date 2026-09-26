@@ -9,10 +9,20 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
+
+<!-- ============================================================
+     ESTRUTURA FIXA DA SPA
+     Header, nav e footer ficam sempre na tela. Só o <main id="app">
+     tem o conteúdo trocado pelo JavaScript a cada navegação.
+     ============================================================ -->
+
 <header>
         <h1> Instituto Conecta Futuro</h1>
         <p> Educação e tecnologia para transformar comunidades</p>
 
+        <!-- EP III: os links agora usam rotas com hash (#/...). O router.js lê o
+             endereço e troca o conteúdo do <main id="app"> sem recarregar a página.
+             O aria-current="page" saiu do HTML: quem marca o link ativo é o JS. -->
         <nav aria-label="Menu principal">
     <input type="checkbox" id="abrir-menu" class="menu-toggle" aria-label="Abrir e fechar o menu">
     <span class="menu-botao" aria-hidden="true">
@@ -22,23 +32,62 @@
     </span>
 
     <ul class="menu">
-            <li><a href="index.html" aria-current="page">Início</a></li>
+            <li><a href="#/">Início</a></li>
 
             <li class="tem-submenu">
-            <a href="projetos.html">Projetos Sociais</a>
+            <a href="#/projetos">Projetos Sociais</a>
             <ul class="submenu">
-                <li><a href="projetos.html#informatica">Informática Básica</a></li>
-                <li><a href="projetos.html#reforco">Reforço Escolar</a></li>
-                <li><a href="projetos.html#meninas">Meninas na Tecnologia</a></li>
-                <li><a href="projetos.html#recondiciona">Recondiciona</a></li>
+                <li><a href="#/projetos/informatica">Informática Básica</a></li>
+                <li><a href="#/projetos/reforco">Reforço Escolar</a></li>
+                <li><a href="#/projetos/meninas">Meninas na Tecnologia</a></li>
+                <li><a href="#/projetos/recondiciona">Recondiciona</a></li>
             </ul>
             </li>
 
-            <li><a href="cadastro.html">Seja Voluntário</a></li>
+            <li><a href="#/cadastro">Seja Voluntário</a></li>
             </ul>
         </nav>
 </header>
-<main>
+
+<!-- EP III: o main agora nasce VAZIO. O router.js injeta aqui o conteúdo
+     da página atual (Início, Projetos ou Cadastro). O id="app" é o
+     "alvo" que o JavaScript procura com document.getElementById("app"). -->
+<main id="app"></main>
+
+<footer>
+    <h2>Contato</h2>
+
+    <address>
+        Instituto Conecta Futuro<br>
+        Av. Salgado Filho, 1500 - Capim Macio<br>
+        Natal/RN - CEP 59123-399<br>
+        Telefone: <a href="tel:+558433334444">(84) 3333-4444</a><br>
+        E-mail: <a href="mailto:contato@conectafuturo.org.br">contato@conectafuturo.org.br</a>
+    </address>
+
+    <nav aria-label="Redes sociais">
+        <ul>
+            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+        </ul>
+    </nav>
+
+    <p><small>CNPJ 00.000.000/0001-99 - Organização da Sociedade Civil de Interesse Público</small></p>
+    <p><small>&copy; <time datetime="2026">2026</time> Instituto Conecta Futuro. Todos os direitos reservados.</small></p>
+</footer>
+
+<!-- ============================================================
+     TEMPLATES DAS PÁGINAS
+     A tag <template> guarda HTML sem exibir na tela. O router.js
+     copia o conteúdo dela para dentro do <main id="app"> quando a
+     rota correspondente é acessada.
+     A página de Projetos NÃO tem template aqui: os cartões são
+     gerados pelo templates.js a partir de uma lista de dados.
+     ============================================================ -->
+
+<!-- Rota #/  (Início): conteúdo que antes ficava direto no <main> -->
+<template id="tpl-inicio">
     <section id="sobre">
         <h2>Quem Somos</h2>
         <p>O <strong>Instituto Conecta Futuro</strong> é uma organização da sociedade civil sem fins lucrativos, fundada em 2018 em Natal, no Rio Grande do Norte. Atuamos na redução da desigualdade de aprendizado digital oferecendo formação gratuita em tecnologia e reforço escolar para crianças e jovens de comunidades periféricas.</p>
@@ -80,7 +129,8 @@
         <h3>Voluntariado</h3>
         <p>Professores, monitores e profissionais de tecnologia podem dedicar algumas horas por semana às nossas turmas.</p>
 
-        <p><a href="cadastro.html" class="botao-cta">Faça seu cadastro e participe</a></p>
+        <!-- EP III: link trocado de cadastro.html para a rota #/cadastro -->
+        <p><a href="#/cadastro" class="botao-cta">Faça seu cadastro e participe</a></p>
     </section>
 
     <aside>
@@ -92,30 +142,225 @@
             <li><strong>4</strong> comunidades da região metropolitana de Natal</li>
         </ul>
     </aside>
-</main>
+</template>
 
-<footer>
-    <h2>Contato</h2>
+<!-- Rota #/cadastro: conteúdo que antes ficava no <main> do cadastro.html -->
+<template id="tpl-cadastro">
+    <h1>Cadastro de Voluntários e Doadores</h1>
 
-    <address>
-        Instituto Conecta Futuro<br>
-        Av. Salgado Filho, 1500 - Capim Macio<br>
-        Natal/RN - CEP 59123-399<br>
-        Telefone: <a href="tel:+558433334444">(84) 3333-4444</a><br>
-        E-mail: <a href="mailto:contato@conectafuturo.org.br">contato@conectafuturo.org.br</a>
-    </address>
+    <p>Preencha o formulário abaixo para se juntar ao instituto Conecta Futuro. Os campos marcados com asterisco (*) são obrigatórios.</p>
 
-    <nav aria-label="Redes sociais">
-        <ul>
-            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-        </ul>
-    </nav>
+    <div class="alerta alerta-info">
+        <strong>Antes de começar:</strong> o cadastro leva cerca de cinco minutos e você pode
+        alterar seus dados depois entrando em contato com a coordenação.
+    </div>
 
-    <p><small>CNPJ 00.000.000/0001-99 - Organização da Sociedade Civil de Interesse Público</small></p>
-    <p><small>&copy; <time datetime="2026">2026</time> Instituto Conecta Futuro. Todos os direitos reservados.</small></p>
-</footer>
+    <!-- Os dois alertas abaixo são apenas uma demonstração das variantes
+         de sucesso e de erro. Num uso real só um deles apareceria por vez,
+         como resposta ao envio do formulário.
+
+    <div class="alerta alerta-sucesso">
+        <strong>Cadastro enviado:</strong> nossa equipe entra em contato em até cinco dias úteis
+        pelo WhatsApp informado.
+    </div>
+
+    <div class="alerta alerta-erro">
+        <strong>Não foi possível enviar:</strong> confira os campos marcados em vermelho e
+        tente novamente.
+    </div> -->
+
+    <form action="#" method="post">
+
+        <fieldset>
+            <legend>Dados pessoais</legend>
+
+            <p>
+                <label for="nome">Nome Completo *</label>
+                <input type="text" id="nome" name="nome" minlength="5" maxlength="100" autocomplete="name" placeholder="Maria da Silva Oliveira" required>
+            </p>
+
+            <p>
+                <label for="cpf">CPF *</label>
+                <input type="text" id="cpf" name="cpf" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" maxlength="14" inputmode="numeric" placeholder="000.000.000-00" title="Digite o CPF no formato 000.000.000-00, com pontos e traço." required>
+            </p>
+
+            <p>
+                <label for="nascimento">Data de nascimento *</label>
+                <input type="date" id="nascimento" name="nascimento" min="1920-01-01" max="2012-12-31" title="É necessário ter no mínimo 14 anos para se cadastrar." required>
+            </p>
+
+            <p>
+                <label for="email">E-mail *</label>
+                <input type="email" id="email" name="email" maxlength="100" autocomplete="email" placeholder="maria@exemplo.com.br" required>
+            </p>
+
+            <p>
+                <label for="telefone">Telefone / WhatsApp *</label>
+                <input type="tel" id="telefone" name="telefone" pattern="\(\d{2}\)\s\d{5}-\d{4}" maxlength="15" inputmode="numeric" autocomplete="tel" placeholder="(84) 99999-0000" title="Digite no formato (84) 99999-0000, com parênteses, espaço e traço." required>
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Endereço</legend>
+
+            <p>
+                <label for="cep">CEP *</label>
+                <input type="text" id="cep" name="cep" pattern="\d{5}-\d{3}" maxlength="9" inputmode="numeric" autocomplete="postal-code" placeholder="59123-399" title="Digite o CEP no formato 00000-000, com traço." required>
+            </p>
+
+            <p>
+                <label for="logradouro">Rua / Avenida *</label>
+                <input type="text" id="logradouro" name="logradouro" maxlength="120" autocomplete="address-line1" placeholder="Av. Salgado Filho" required>
+            </p>
+
+            <p>
+                <label for="numero">Número *</label>
+                <input type="text" id="numero" name="numero" maxlength="10" placeholder="1500" required>
+            </p>
+
+            <p>
+                <label for="complemento">Complemento</label>
+                <input type="text" id="complemento" name="complemento" maxlength="60" placeholder="Apto 302, Bloco B">
+            </p>
+
+            <p>
+                <label for="bairro">Bairro *</label>
+                <input type="text" id="bairro" name="bairro" maxlength="60" placeholder="Capim Macio" required>
+            </p>
+
+            <p>
+                <label for="cidade">Cidade *</label>
+                <input type="text" id="cidade" name="cidade" maxlength="60" placeholder="Natal" required>
+            </p>
+
+            <p>
+                <label for="uf">Estado *</label>
+                <select id="uf" name="uf" required>
+                    <option value="">Selecione o estado</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="CE">Ceará</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="OUTRO">Outro estado</option>
+                </select>
+            </p>
+        </fieldset>
+
+        <fieldset>
+            <legend>Como deseja participar</legend>
+
+            <fieldset>
+                <legend>Tipo de participação *</legend>
+
+                <p>
+                    <input type="radio" id="tipo-voluntario" name="tipo" value="voluntario" required>
+                    <label for="tipo-voluntario">Quero ser voluntário</label>
+                </p>
+
+                <p>
+                    <input type="radio" id="tipo-doador" name="tipo" value="doador">
+                    <label for="tipo-doador">Quero doar recursos ou equipamentos</label>
+                </p>
+
+                <p>
+                    <input type="radio" id="tipo-ambos" name="tipo" value="ambos">
+                    <label for="tipo-ambos">Quero as duas coisas</label>
+                </p>
+            </fieldset>
+
+            <p>
+                <label for="projeto">Projeto de interesse *</label>
+                <select id="projeto" name="projeto" required>
+                    <option value="">Selecione um projeto</option>
+                    <option value="informatica">Informática Básica</option>
+                    <option value="reforco">Reforço Escolar</option>
+                    <option value="meninas">Meninas na Tecnologia</option>
+                    <option value="recondiciona">Recondiciona</option>
+                    <option value="indiferente">Qualquer um, onde houver necessidade</option>
+                </select>
+            </p>
+
+            <fieldset>
+                <legend>Disponibilidade</legend>
+
+                <p>
+                    <input type="checkbox" id="disp-manha" name="disponibilidade" value="manha">
+                    <label for="disp-manha">Manhã</label>
+                </p>
+
+                <p>
+                    <input type="checkbox" id="disp-tarde" name="disponibilidade" value="tarde">
+                    <label for="disp-tarde">Tarde</label>
+                </p>
+
+                <p>
+                    <input type="checkbox" id="disp-noite" name="disponibilidade" value="noite">
+                    <label for="disp-noite">Noite</label>
+                </p>
+
+                <p>
+                    <input type="checkbox" id="disp-sabado" name="disponibilidade" value="sabado">
+                    <label for="disp-sabado">Sábado</label>
+                </p>
+            </fieldset>
+
+            <p>
+                <label for="horas">Horas disponíveis por semana</label>
+                <input type="number" id="horas" name="horas" min="2" max="40" step="1" placeholder="4">
+            </p>
+
+            <p>
+                <label for="mensagem">Conte um pouco sobre você</label>
+                <textarea id="mensagem" name="mensagem" rows="5" cols="50" maxlength="500" placeholder="Formação, experiência e o que te motiva a participar."></textarea>
+            </p>
+        </fieldset>
+
+        <fieldset id="consentimento">
+            <legend>Consentimento</legend>
+
+            <p>
+                <input type="checkbox" id="lgpd" name="lgpd" value="aceito" required>
+                <label for="lgpd">Autorizo o Instituto Conecta Futuro a usar meus dados para contato sobre atividades de voluntariado e doação, conforme a Lei Geral de Proteção de Dados. *</label>
+            </p>
+
+            <p><a href="#modal-lgpd">Ver como seus dados serão usados</a></p>
+        </fieldset>
+
+        <p>
+            <button type="submit">Enviar cadastro</button>
+            <button type="reset">Limpar formulário</button>
+        </p>
+
+    </form>
+</template>
+
+<!-- ============================================================
+     OVERLAYS (modal e toast)
+     Ficam fora do <main> porque cobrem a tela inteira. Vieram do
+     cadastro.html. Por enquanto continuam abrindo pelo :target do CSS;
+     na Etapa 3 o ui.js passa a controlar a abertura e o fechamento.
+     O router ignora âncoras que não começam com "#/", por isso
+     #modal-lgpd e #consentimento não trocam de página.
+     ============================================================ -->
+
+<div class="modal" id="modal-lgpd" role="dialog" aria-labelledby="titulo-modal">
+    <div class="modal-caixa">
+        <h2 id="titulo-modal">Uso dos seus dados</h2>
+        <p>Os dados informados são usados apenas para contato sobre voluntariado e doação.
+        Não compartilhamos suas informações com terceiros e você pode solicitar a exclusão
+        a qualquer momento pelo e-mail contato@conectafuturo.org.br.</p>
+        <p><a href="#consentimento" class="botao-cta">Entendi</a></p>
+    </div>
+</div>
+
+<div class="toast" id="toast-sucesso" role="status">
+    <strong>Cadastro recebido</strong>
+    <span>Obrigado por se juntar ao Conecta Futuro.</span>
+    <a href="#consentimento" class="toast-fechar" aria-label="Fechar aviso">&times;</a>
+</div>
+
+<!-- Ponto de entrada da aplicação. type="module" permite usar import/export
+     entre os arquivos JS (precisa do Live Server, não funciona em file://). -->
 <script type="module" src="../js/main.js"></script>
 </body>
 </html>

@@ -1,1 +1,3 @@
-console.log("Conecta Futuro: JS carregado!");
+import { iniciarRouter } from "./modules/router.js";
+
+iniciarRouter();

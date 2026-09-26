@@ -3,134 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Conheça os projetos sociais do Instituto Conecta Futuro: informática básica, reforço escolar, programação para meninas e recondicionamento de equipamentos.">
     <meta name="author" content="Rony Machado">
     <title>Projetos Sociais - Instituto Conecta Futuro</title>
-    <link rel="stylesheet" href="../css/style.css">
+
+    <!-- EP III: com a SPA, todo o conteúdo desta página passou a morar no
+         index.html (os cartões agora são gerados pelo js/modules/templates.js).
+         Este arquivo fica só como redirecionamento: se alguém acessar um
+         link antigo ou favorito para esta página, é levado automaticamente
+         para a rota equivalente da SPA. -->
+    <meta http-equiv="refresh" content="0; url=index.html#/projetos">
+    <link rel="canonical" href="index.html#/projetos">
 </head>
 <body>
-    <header>
-        <p><strong>Instituto Conecta Futuro</strong></p>
-
-        <nav aria-label="Menu principal">
-    <input type="checkbox" id="abrir-menu" class="menu-toggle" aria-label="Abrir e fechar o menu">
-    <span class="menu-botao" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-    </span>
-
-    <ul class="menu">
-        <li><a href="index.html">Início</a></li>
-
-        <li class="tem-submenu">
-            <a href="projetos.html" aria-current="page">Projetos Sociais</a>
-            <ul class="submenu">
-                <li><a href="projetos.html#informatica">Informática Básica</a></li>
-                <li><a href="projetos.html#reforco">Reforço Escolar</a></li>
-                <li><a href="projetos.html#meninas">Meninas na Tecnologia</a></li>
-                <li><a href="projetos.html#recondiciona">Recondiciona</a></li>
-            </ul>
-        </li>
-
-        <li><a href="cadastro.html">Seja Voluntário</a></li>
-    </ul>
-        </nav>
-    </header>
-
-    <main>
-        <h1>Projetos Sociais</h1>
-        <p>Atuamos em quatro frentes complementares. Todos os projetos são gratuitos e abertos a moradores das comunidades atendidas.</p>
-
-        <article class="card-projeto" id="informatica">
-            <h2>Informática Básica</h2>
-            <span class="badge badge-sucesso">Inscrições abertas</span>
-            <p>Curso introdutório de quatro meses cobrindo sistema operacional, editor de texto, planilhas e uso seguro da internet. Turmas de até 20 alunos, com computador individual.</p>
-            <dl>
-                <dt>Público-alvo</dt>
-                <dd>Jovens e adultos a partir de 14 anos</dd>
-
-                <dt>Duração</dt>
-                <dd>4 meses, dois encontros semanais</dd>
-
-                <dt>Unidade</dt>
-                <dd>Capim Macio, Natal/RN</dd>
-            </dl>
-        </article>
-
-        <article class="card-projeto" id="reforco">
-            <h2>Reforço Escolar</h2>
-            <span class="badge badge-sucesso">Inscrições abertas</span>
-            <p>Acompanhamento em Matemática e Língua Portuguesa para alunos do ensino fundamental, alinhado ao conteúdo da rede municipal. Grupos pequenos, com monitoria individualizada.</p>
-            <dl>
-                <dt>Público-alvo</dt>
-                <dd>Estudantes do 6º ao 9º ano</dd>
-
-                <dt>Duração</dt>
-                <dd>Contínuo, durante o ano letivo</dd>
-
-                <dt>Unidade</dt>
-                <dd>Capim Macio e Nova Parnamirim</dd>
-            </dl>
-        </article>
-
-        <article class="card-projeto" id="meninas">
-            <h2>Meninas na Tecnologia</h2>
-            <span class="badge badge-alerta">Últimas vagas</span>
-            <p>Oficinas de lógica de programação e desenvolvimento web voltadas a meninas, com mentoria de profissionais mulheres da área. Criado em <time datetime="2023">2023</time> para enfrentar a baixa presença feminina em cursos de tecnologia.</p>
-            <dl>
-                <dt>Público-alvo</dt>
-                <dd>Meninas de 12 a 17 anos</dd>
-
-                <dt>Duração</dt>
-                <dd>6 meses, encontros aos sábados</dd>
-
-                <dt>Unidade</dt>
-                <dd>Capim Macio, Natal/RN</dd>
-            </dl>
-        </article>
-
-        <article class="card-projeto" id="recondiciona">
-            <h2>Recondiciona</h2>
-            <span class="badge badge-neutro">Fluxo contínuo</span>
-            <p>Laboratório que recebe computadores e notebooks doados por empresas e pessoas físicas, recupera o que é aproveitável e destina os equipamentos às salas de aula dos demais projetos.</p>
-            <dl>
-                <dt>Como participar</dt>
-                <dd>Doação de equipamentos ou voluntariado técnico</dd>
-
-                <dt>Funcionamento</dt>
-                <dd>Segunda a sexta, das 8h às 17h</dd>
-
-                <dt>Unidade</dt>
-                <dd>Capim Macio, Natal/RN</dd>
-            </dl>
-        </article>
-
-        <p><a href="cadastro.html" class="botao-cta">Quero apoiar um destes projetos</a></p>
-    </main>
-
-    <footer>
-        <h2>Contato</h2>
-
-        <address>
-            Instituto Conecta Futuro<br>
-            Av. Salgado Filho, 1500 - Capim Macio<br>
-            Natal/RN - CEP 59123-399<br>
-            Telefone: <a href="tel:+558433334444">(84) 3333-4444</a><br>
-            E-mail: <a href="mailto:contato@conectafuturo.org.br">contato@conectafuturo.org.br</a>
-        </address>
-
-        <nav aria-label="Redes sociais">
-            <ul>
-                <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-                <li><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-                <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            </ul>
-        </nav>
-
-        <p><small>CNPJ 00.000.000/0001-99 - Organização da Sociedade Civil de Interesse Público</small></p>
-        <p><small>&copy; <time datetime="2026">2026</time> Instituto Conecta Futuro. Todos os direitos reservados.</small></p>
-    </footer>
-<script type="module" src="../js/main.js"></script>
+    <!-- Fallback caso o navegador não siga o redirecionamento automático -->
+    <p>Esta página mudou de endereço. <a href="index.html#/projetos">Clique aqui para acessar Projetos Sociais</a>.</p>
 </body>
 </html>
