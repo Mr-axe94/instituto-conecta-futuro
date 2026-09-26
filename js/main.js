@@ -1,0 +1,1 @@
+console.log("Conecta Futuro: JS carregado!");
