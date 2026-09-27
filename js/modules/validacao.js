@@ -36,16 +36,6 @@ function cpfValido(cpf) {
         && calcularDigito(numeros.slice(0, 10)) === Number(numeros[10]);
 }
 
-function calcularIdade(dataTexto) {
-    const nascimento = new Date(dataTexto + "T00:00");
-    const hoje = new Date();
-    let idade = hoje.getFullYear() - nascimento.getFullYear();
-    const aindaNaoFezAniversario =
-        hoje.getMonth() < nascimento.getMonth() ||
-        (hoje.getMonth() === nascimento.getMonth() && hoje.getDate() < nascimento.getDate());
-    if (aindaNaoFezAniversario) idade--;
-    return idade;
-}
 
 // ---------- Regras específicas de cada campo (retornam a mensagem de erro ou "") ----------
 const regras = {
@@ -57,16 +47,21 @@ const regras = {
         return "";
     },
     nascimento: (campo) => {
-        const idade = calcularIdade(campo.value);
-        if (idade < 0) return "A data de nascimento não pode ser no futuro.";
+        // dayjs vem da biblioteca Day.js, carregada via CDN no index.html
+        const nascimento = dayjs(campo.value);
+        if (nascimento.isAfter(dayjs())) return "A data de nascimento não pode ser no futuro.";
+        const idade = dayjs().diff(nascimento, "year");
         if (idade < 14) return "É preciso ter pelo menos 14 anos para se cadastrar.";
         if (idade > 105) return "Confira o ano de nascimento.";
         return "";
     },
     telefone: (campo) =>
         somenteNumeros(campo.value).length === 11 ? "" : "Informe DDD + 9 dígitos. Ex.: (84) 99999-0000.",
-    cep: (campo) =>
-        somenteNumeros(campo.value).length === 8 ? "" : "O CEP deve ter 8 números. Ex.: 59123-399.",
+    cep: (campo) => {
+        if (somenteNumeros(campo.value).length !== 8) return "O CEP deve ter 8 números. Ex.: 59123-399.";
+        if (campo.dataset.naoEncontrado) return "CEP não encontrado. Confira os números ou preencha o endereço manualmente.";
+        return "";
+    },
     email: (campo) =>
         campo.validity.typeMismatch ? "Informe um e-mail válido. Ex.: maria@exemplo.com.br." : "",
 };
@@ -97,7 +92,7 @@ function exibirErro(campo, mensagem) {
 }
 
 // Valida um campo: primeiro o obrigatório, depois a regra específica
-function validarCampo(campo) {
+export function validarCampo(campo) {
     campo.setCustomValidity("");
     let mensagem = "";
 

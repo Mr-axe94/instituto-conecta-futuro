@@ -3,6 +3,7 @@
 import { iniciarUI, mostrarToast } from "./modules/ui.js";
 import { iniciarRouter } from "./modules/router.js";
 import { iniciarValidacao } from "./modules/validacao.js";
+import { iniciarBuscaCep } from "./modules/cep.js";
 import {
     lerDadosDoFormulario, salvarCadastro, listarCadastros,
     salvarRascunho, restaurarRascunho, apagarRascunho,
@@ -42,4 +43,5 @@ iniciarValidacao((form) => {
     atualizarContador();
     mostrarToast("Cadastro recebido", "Seus dados foram salvos. Obrigado por se juntar ao Conecta Futuro!");
 });
+iniciarBuscaCep(); // depois da validação: a máscara do CEP precisa rodar antes da busca
 iniciarRouter(); // por último: quando ele montar a primeira página, os ouvintes acima já existem

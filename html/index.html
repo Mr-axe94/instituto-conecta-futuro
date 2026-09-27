@@ -154,7 +154,7 @@
         <strong>Antes de começar:</strong> o cadastro leva cerca de cinco minutos e você pode
         alterar seus dados depois entrando em contato com a coordenação.
     </div>  
-      
+
     <!-- Preenchido pelo main.js com a quantidade de cadastros salvos no localStorage -->
     <p id="contador-cadastros"></p>
 
@@ -325,7 +325,9 @@
                 <label for="lgpd">Autorizo o Instituto Conecta Futuro a usar meus dados para contato sobre atividades de voluntariado e doação, conforme a Lei Geral de Proteção de Dados. *</label>
             </p>
 
-            <p><a href="#modal-lgpd" data-abrir-modal="modal-lgpd">Ver como seus dados serão usados</a></p>        </fieldset>
+            <p><a href="#modal-lgpd" data-abrir-modal="modal-lgpd">Ver como seus dados serão usados</a></p>        
+        
+        </fieldset>
 
         <p>
             <button type="submit">Enviar cadastro</button>
@@ -359,6 +361,10 @@
     <span>Obrigado por se juntar ao Conecta Futuro.</span>
         <a href="#consentimento" class="toast-fechar" data-fechar-toast aria-label="Fechar aviso">&times;</a>
 </div>
+
+<!-- Biblioteca externa Day.js (via CDN): cálculo de idade no validacao.js.
+     Script comum, sem type="module": roda antes do main.js e cria a variável global dayjs. -->
+<script src="https://cdn.jsdelivr.net/npm/dayjs@1.11.13/dayjs.min.js"></script>
 
 <!-- Ponto de entrada da aplicação. type="module" permite usar import/export
      entre os arquivos JS (precisa do Live Server, não funciona em file://). -->
