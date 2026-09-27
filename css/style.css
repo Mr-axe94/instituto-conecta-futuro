@@ -810,17 +810,17 @@ textarea:user-valid {
 
 input:user-invalid,
 select:user-invalid,
-textarea:user-invalid {
+textarea:user-invalid,
+[aria-invalid="true"] {
     border-color: var(--cor-erro);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-erro) 15%, transparent);
 }
 
-/* Mensagem de erro criada pelo CSS, sem JavaScript */
+/* Mensagem de erro específica de cada campo, criada pelo validacao.js */
 
-fieldset p:has(input:user-invalid)::after,
-fieldset p:has(select:user-invalid)::after,
-fieldset p:has(textarea:user-invalid)::after {
-    content: "Confira este campo antes de enviar";
+.erro-campo {
+    display: block;
+    margin-top: var(--esp-1);
     color: var(--cor-erro);
     font-size: var(--fs-100);
     font-weight: var(--peso-medio);
