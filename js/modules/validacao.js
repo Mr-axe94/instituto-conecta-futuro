@@ -1,5 +1,5 @@
 // validacao.js: máscaras, regras de consistência e mensagens de erro do cadastro
-
+import { cpfJaCadastrado } from "./storage.js";
 // ---------- Máscaras: formatam o valor enquanto a pessoa digita ----------
 const mascaras = {
     cpf: (valor) => valor.replace(/\D/g, "").slice(0, 11)
@@ -51,8 +51,11 @@ function calcularIdade(dataTexto) {
 const regras = {
     nome: (campo) =>
         campo.value.trim().split(/\s+/).length < 2 ? "Informe nome e sobrenome." : "",
-    cpf: (campo) =>
-        cpfValido(campo.value) ? "" : "CPF inválido. Confira os números digitados.",
+    cpf: (campo) => {
+        if (!cpfValido(campo.value)) return "CPF inválido. Confira os números digitados.";
+        if (cpfJaCadastrado(campo.value)) return "Este CPF já está cadastrado.";
+        return "";
+    },
     nascimento: (campo) => {
         const idade = calcularIdade(campo.value);
         if (idade < 0) return "A data de nascimento não pode ser no futuro.";

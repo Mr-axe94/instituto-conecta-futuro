@@ -23,7 +23,12 @@ function renderizar() {
     document.title = `${titulos[pagina] ?? "Início"} | Instituto Conecta Futuro`;
     marcarLinkAtivo(pagina);
        fecharMenu();
-    if (secao) {
+
+       // Avisa o resto da aplicação que uma página nova foi montada
+    
+       document.dispatchEvent(new CustomEvent("paginaCarregada", { detail: { pagina } }));
+    
+       if (secao) {
         document.getElementById(secao)?.scrollIntoView({ behavior: "smooth" });
     } else {
         window.scrollTo(0, 0);
