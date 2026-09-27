@@ -323,8 +323,7 @@
                 <label for="lgpd">Autorizo o Instituto Conecta Futuro a usar meus dados para contato sobre atividades de voluntariado e doação, conforme a Lei Geral de Proteção de Dados. *</label>
             </p>
 
-            <p><a href="#modal-lgpd">Ver como seus dados serão usados</a></p>
-        </fieldset>
+            <p><a href="#modal-lgpd" data-abrir-modal="modal-lgpd">Ver como seus dados serão usados</a></p>        </fieldset>
 
         <p>
             <button type="submit">Enviar cadastro</button>
@@ -343,20 +342,20 @@
      #modal-lgpd e #consentimento não trocam de página.
      ============================================================ -->
 
-<div class="modal" id="modal-lgpd" role="dialog" aria-labelledby="titulo-modal">
-    <div class="modal-caixa">
+<div class="modal" id="modal-lgpd" role="dialog" aria-modal="true" aria-labelledby="titulo-modal">
+        <div class="modal-caixa" tabindex="-1">
         <h2 id="titulo-modal">Uso dos seus dados</h2>
         <p>Os dados informados são usados apenas para contato sobre voluntariado e doação.
         Não compartilhamos suas informações com terceiros e você pode solicitar a exclusão
         a qualquer momento pelo e-mail contato@conectafuturo.org.br.</p>
-        <p><a href="#consentimento" class="botao-cta">Entendi</a></p>
+                <p><a href="#consentimento" class="botao-cta" data-fechar-modal>Entendi</a></p>
     </div>
 </div>
 
 <div class="toast" id="toast-sucesso" role="status">
     <strong>Cadastro recebido</strong>
     <span>Obrigado por se juntar ao Conecta Futuro.</span>
-    <a href="#consentimento" class="toast-fechar" aria-label="Fechar aviso">&times;</a>
+        <a href="#consentimento" class="toast-fechar" data-fechar-toast aria-label="Fechar aviso">&times;</a>
 </div>
 
 <!-- Ponto de entrada da aplicação. type="module" permite usar import/export

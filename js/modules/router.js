@@ -1,5 +1,5 @@
 import { paginaProjetos, paginaDoTemplate } from "./templates.js";
-
+import { fecharMenu } from "./ui.js";
 // Mapa de rotas: o nome da página aponta para a função que gera o HTML
 const rotas = {
     "": () => paginaDoTemplate("tpl-inicio"),
@@ -22,8 +22,7 @@ function renderizar() {
     document.getElementById("app").innerHTML = gerarHtml();
     document.title = `${titulos[pagina] ?? "Início"} | Instituto Conecta Futuro`;
     marcarLinkAtivo(pagina);
-    document.getElementById("abrir-menu").checked = false; // fecha o menu mobile
-
+       fecharMenu();
     if (secao) {
         document.getElementById(secao)?.scrollIntoView({ behavior: "smooth" });
     } else {

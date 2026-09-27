@@ -563,7 +563,7 @@ footer small {
 
 /* ============================================================
    5.1 COMPONENTES DE FEEDBACK
-   Badges, alertas, modal e toast. Tudo em CSS puro.
+   Badges, alertas, modal e toast. Estilo em CSS; abertura controlada pelo ui.js
    ============================================================ */
 
 /* --- Badges: etiquetas de status --- */
@@ -619,7 +619,7 @@ footer small {
     color: var(--cor-neutra-900);
 }
 
-/* --- Modal: abre pelo seletor :target --- */
+/* --- Modal: abre pela classe .aberto (ui.js) ou pelo :target --- */
 
 .modal {
     position: fixed;
@@ -639,7 +639,8 @@ footer small {
                 visibility var(--transicao);
 }
 
-.modal:target {
+.modal:target,
+.modal.aberto {
     opacity: 1;
     visibility: visible;
 }
@@ -657,7 +658,8 @@ footer small {
     transition: transform var(--transicao);
 }
 
-.modal:target .modal-caixa {
+.modal:target .modal-caixa,
+.modal.aberto .modal-caixa {
     transform: translateY(0);
 }
 
@@ -701,12 +703,12 @@ footer small {
                 visibility var(--transicao);
 }
 
-.toast:target {
+.toast:target,
+.toast.visivel {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
 }
-
 .toast strong {
     font-family: var(--fonte-titulo);
 }
