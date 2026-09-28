@@ -340,8 +340,8 @@
 <!-- ============================================================
      OVERLAYS (modal e toast)
      Ficam fora do <main> porque cobrem a tela inteira. Vieram do
-     cadastro.html. Por enquanto continuam abrindo pelo :target do CSS;
-     na Etapa 3 o ui.js passa a controlar a abertura e o fechamento.
+     cadastro.html. Abertura e fechamento controlados pelo ui.js
+     (classes .aberto e .visivel), com o :target do CSS como reserva.
      O router ignora âncoras que não começam com "#/", por isso
      #modal-lgpd e #consentimento não trocam de página.
      ============================================================ -->
