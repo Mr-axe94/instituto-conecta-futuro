@@ -1,3 +1,27 @@
+# Instituto Conecta Futuro
+
+Site institucional de uma ONG fictícia de educação e tecnologia em Natal/RN, desenvolvido na disciplina de Desenvolvimento Front-end da graduação em Ciência da Computação (Cruzeiro do Sul).
+
+O projeto foi construído em etapas: estrutura em HTML5 semântico, estilização com CSS3 (design system e layout responsivo), interatividade com JavaScript e, por fim, versionamento, acessibilidade e deploy.
+
+## Funcionalidades
+
+- Página inicial com apresentação do instituto
+- Página de projetos
+- Formulário de cadastro com validação em tempo real
+- Preenchimento automático de endereço pelo CEP (API ViaCEP)
+- Menu responsivo, modais e notificações (toast)
+- Navegação entre páginas controlada por JavaScript (router)
+- Dados do formulário salvos no navegador (localStorage)
+
+## Tecnologias
+
+- HTML5 semântico
+- CSS3 (variáveis nativas, Grid e Flexbox)
+- JavaScript
+- [Day.js](https://day.js.org/) para datas
+- [ViaCEP](https://viacep.com.br/) para consulta de endereço
+
 ## Estrutura de pastas
 
 ```
