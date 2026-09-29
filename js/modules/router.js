@@ -9,6 +9,9 @@ const rotas = {
 
 const titulos = { "": "Início", projetos: "Projetos Sociais", cadastro: "Seja Voluntário" };
 
+// EP IV: na primeira carga o foco fica no começo da página (comportamento normal do navegador)
+let primeiraCarga = true;
+
 function renderizar() {
     const hash = location.hash;
 
@@ -22,17 +25,31 @@ function renderizar() {
     document.getElementById("app").innerHTML = gerarHtml();
     document.title = `${titulos[pagina] ?? "Início"} | Instituto Conecta Futuro`;
     marcarLinkAtivo(pagina);
-       fecharMenu();
+    fecharMenu();
 
-       // Avisa o resto da aplicação que uma página nova foi montada
-    
-       document.dispatchEvent(new CustomEvent("paginaCarregada", { detail: { pagina } }));
-    
-       if (secao) {
-        document.getElementById(secao)?.scrollIntoView({ behavior: "smooth" });
+    // Avisa o resto da aplicação que uma página nova foi montada
+    document.dispatchEvent(new CustomEvent("paginaCarregada", { detail: { pagina } }));
+
+    // EP IV: leva o foco ao conteúdo novo, assim o leitor de tela percebe a troca de página
+    if (!primeiraCarga) moverFoco(secao);
+    primeiraCarga = false;
+
+    // EP IV: sem rolagem animada para quem desativou animações no sistema
+    const suave = !matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (secao) {
+        document.getElementById(secao)?.scrollIntoView({ behavior: suave ? "smooth" : "auto" });
     } else {
         window.scrollTo(0, 0);
     }
+}
+
+// EP IV: foca a seção pedida ou, sem seção, o primeiro título da página
+function moverFoco(secao) {
+    const alvo = (secao && document.getElementById(secao)) || document.querySelector("#app h1, #app h2");
+    if (!alvo) return;
+    alvo.setAttribute("tabindex", "-1");
+    alvo.focus({ preventScroll: true });
 }
 
 function marcarLinkAtivo(pagina) {
