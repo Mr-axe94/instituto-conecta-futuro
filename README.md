@@ -74,7 +74,15 @@ Os commits seguem o padrão semântico: `feat:`, `fix:`, `docs:`, `style:`, `ref
 
 ## Acessibilidade
 
-_Em andamento._
+O site segue as diretrizes **WCAG 2.1 nível AA**:
+
+- **Estrutura semântica:** landmarks `header`, `nav`, `main`, `aside` e `footer`, com as duas navegações identificadas por `aria-label` ("Menu principal" e "Redes sociais").
+- **Navegação por teclado:** link "Pular para o conteúdo" no primeiro Tab, foco visível em todos os elementos (branco sobre o azul do cabeçalho e do rodapé) e tecla Esc fechando menu e modal.
+- **Modal acessível:** `role="dialog"`, `aria-modal`, `aria-labelledby` e `aria-describedby`; o foco fica preso no modal (`inert` no fundo) e volta para quem o abriu.
+- **Leitor de tela na SPA:** a cada troca de rota o foco vai para o título da página nova, e o link ativo recebe `aria-current="page"`.
+- **Formulário:** `label` em todos os campos, grupos com `fieldset` e `legend`, erros ligados ao campo por `aria-invalid` e `aria-describedby`, resumo de erros com `role="alert"` e contador de cadastros com `aria-live`.
+- **Contraste:** todas as cores do design system passam de 4.5:1. Há ainda um botão **Alto contraste** (`aria-pressed`), acima de 7:1, que segue a preferência do sistema (`prefers-contrast`) e fica salvo no navegador.
+- **Movimento reduzido:** animações e rolagem suave desligadas para quem ativou `prefers-reduced-motion`.
 
 ## Deploy
 
