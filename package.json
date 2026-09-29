@@ -1,0 +1,27 @@
+{
+  "name": "instituto-conecta-futuro",
+  "version": "1.0.0",
+  "description": "Site institucional de uma ONG fictícia de educação e tecnologia em Natal/RN, desenvolvido na disciplina de Desenvolvimento Front-end da graduação em Ciência da Computação (Cruzeiro do Sul).",
+  "main": "index.js",
+    "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mr-axe94/instituto-conecta-futuro.git"
+  },
+  "keywords": [],
+  "author": "Rony Machado",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Mr-axe94/instituto-conecta-futuro/issues"
+  },
+  "homepage": "https://github.com/Mr-axe94/instituto-conecta-futuro#readme",
+  "devDependencies": {
+    "vite": "^8.3.1",
+    "vite-plugin-minify": "^3.0.0"
+  }
+}
