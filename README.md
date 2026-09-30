@@ -21,15 +21,20 @@ O projeto foi construído em etapas: estrutura em HTML5 semântico, estilizaçã
 - JavaScript
 - [Day.js](https://day.js.org/) para datas
 - [ViaCEP](https://viacep.com.br/) para consulta de endereço
+- [Vite](https://vite.dev/) para build e minificação
+- GitHub Actions e GitHub Pages para deploy automático
 
 ## Estrutura de pastas
 
 ```
 instituto-conecta-futuro/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml    # deploy automático no GitHub Pages
 ├── html/
 │   ├── index.html        # página inicial
-│   ├── projetos.html     # projetos do instituto
-│   └── cadastro.html     # formulário de voluntários
+│   ├── projetos.html     # redireciona para a rota de projetos
+│   └── cadastro.html     # redireciona para a rota de cadastro
 ├── css/
 │   └── style.css         # design system e layout responsivo
 ├── js/
@@ -39,21 +44,30 @@ instituto-conecta-futuro/
 │       ├── router.js     # navegação entre páginas
 │       ├── storage.js    # salvamento de dados no navegador
 │       ├── templates.js  # geração de conteúdo dinâmico
-│       ├── ui.js         # menu, modais e toasts
+│       ├── ui.js         # menu, modais, toasts e alto contraste
 │       └── validacao.js  # validação do formulário
 ├── imagens/
-│   └── turma-informatica.jpg
+│   ├── turma-informatica.avif  # versão principal (AVIF)
+│   └── turma-informatica.webp  # reserva para navegadores sem AVIF
+├── package.json          # dependências e scripts (dev, build, preview)
+├── vite.config.js        # configuração do build
 └── README.md
 ```
 
 ## Como executar
 
+Pré-requisito: [Node.js](https://nodejs.org/) (versão LTS).
+
 1. Clone o repositório:
    `git clone https://github.com/Mr-axe94/instituto-conecta-futuro.git`
-2. Abra a pasta no VS Code.
-3. Abra `html/index.html` no navegador, ou use a extensão **Live Server** (botão direito no arquivo → *Open with Live Server*).
-
-Não precisa instalar dependências: as bibliotecas externas são carregadas por CDN.
+2. Instale as dependências:
+   `npm install`
+3. Rode em modo de desenvolvimento:
+   `npm run dev`
+4. Para gerar a versão de produção (minificada) na pasta `dist/`:
+   `npm run build`
+5. Para testar a versão de produção localmente:
+   `npm run preview`
 
 ## Como usar
 
@@ -86,7 +100,14 @@ O site segue as diretrizes **WCAG 2.1 nível AA**:
 
 ## Deploy
 
-_Em breve._
+Site publicado: **https://mr-axe94.github.io/instituto-conecta-futuro/**
+
+O deploy é automático: a cada merge na branch `main`, o GitHub Actions (`.github/workflows/deploy.yml`) instala as dependências, roda `npm run build` e publica a pasta `dist/` no GitHub Pages.
+
+Otimizações do build:
+
+- HTML, CSS e JavaScript minificados pelo Vite (os 7 módulos JS viram 1 arquivo)
+- Imagem principal em AVIF (48% menor), com WebP de reserva via `<picture>`
 
 ## Autor
 
