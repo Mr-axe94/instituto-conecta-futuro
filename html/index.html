@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-
+<a href="#app" class="pular-link">Pular para o conteúdo</a>
 <!-- ============================================================
      ESTRUTURA FIXA DA SPA
      Header, nav e footer ficam sempre na tela. Só o <main id="app">
@@ -19,6 +19,7 @@
 <header>
         <h1> Instituto Conecta Futuro</h1>
         <p> Educação e tecnologia para transformar comunidades</p>
+        <button type="button" id="botao-contraste" class="botao-contraste" aria-pressed="false">Alto contraste</button>
 
         <!-- EP III: os links agora usam rotas com hash (#/...). O router.js lê o
              endereço e troca o conteúdo do <main id="app"> sem recarregar a página.
@@ -52,7 +53,7 @@
 <!-- EP III: o main agora nasce VAZIO. O router.js injeta aqui o conteúdo
      da página atual (Início, Projetos ou Cadastro). O id="app" é o
      "alvo" que o JavaScript procura com document.getElementById("app"). -->
-<main id="app"></main>
+<main id="app" tabindex="-1"></main>
 
 <footer>
     <h2>Contato</h2>
@@ -67,9 +68,9 @@
 
     <nav aria-label="Redes sociais">
         <ul>
-            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (abre em nova aba)</span></a></li>
+            <li><a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">Facebook<span class="sr-only"> (abre em nova aba)</span></a></li>
+            <li><a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (abre em nova aba)</span></a></li>
         </ul>
     </nav>
 
@@ -93,7 +94,10 @@
         <p>O <strong>Instituto Conecta Futuro</strong> é uma organização da sociedade civil sem fins lucrativos, fundada em 2018 em Natal, no Rio Grande do Norte. Atuamos na redução da desigualdade de aprendizado digital oferecendo formação gratuita em tecnologia e reforço escolar para crianças e jovens de comunidades periféricas.</p>
 
         <figure>
-            <img src="../imagens/turma-informatica.jpg" alt="Jovens sentados em computadores durante uma aula de informática no Instituto Conecta Futuro" width="800" height="450">
+               <picture>
+                   <source srcset="../imagens/turma-informatica.avif" type="image/avif">
+                   <img src="../imagens/turma-informatica.webp" alt="Jovens sentados em computadores durante uma aula de informática no Instituto Conecta Futuro" width="600" height="405" decoding="async">
+               </picture>
             <figcaption>Turma de Informática Básica, unidade Capim Macio, 2025.</figcaption>
         </figure>
     </section>
@@ -156,7 +160,7 @@
     </div>  
 
     <!-- Preenchido pelo main.js com a quantidade de cadastros salvos no localStorage -->
-    <p id="contador-cadastros"></p>
+    <p id="contador-cadastros" aria-live="polite"></p>
 
     <!-- Os dois alertas abaixo são apenas uma demonstração das variantes
          de sucesso e de erro. Num uso real só um deles apareceria por vez,
@@ -346,20 +350,20 @@
      #modal-lgpd e #consentimento não trocam de página.
      ============================================================ -->
 
-<div class="modal" id="modal-lgpd" role="dialog" aria-modal="true" aria-labelledby="titulo-modal">
+<div class="modal" id="modal-lgpd" role="dialog" aria-modal="true" aria-labelledby="titulo-modal" aria-describedby="texto-modal">
         <div class="modal-caixa" tabindex="-1">
         <h2 id="titulo-modal">Uso dos seus dados</h2>
-        <p>Os dados informados são usados apenas para contato sobre voluntariado e doação.
+        <p id="texto-modal">Os dados informados são usados apenas para contato sobre voluntariado e doação.
         Não compartilhamos suas informações com terceiros e você pode solicitar a exclusão
         a qualquer momento pelo e-mail contato@conectafuturo.org.br.</p>
-                <p><a href="#consentimento" class="botao-cta" data-fechar-modal>Entendi</a></p>
+                <p><button type="button" class="botao-cta" data-fechar-modal>Entendi</button></p>
     </div>
 </div>
 
 <div class="toast" id="toast-sucesso" role="status">
     <strong>Cadastro recebido</strong>
     <span>Obrigado por se juntar ao Conecta Futuro.</span>
-        <a href="#consentimento" class="toast-fechar" data-fechar-toast aria-label="Fechar aviso">&times;</a>
+        <button type="button" class="toast-fechar" data-fechar-toast aria-label="Fechar aviso">&times;</button>
 </div>
 
 <!-- Biblioteca externa Day.js (via CDN): cálculo de idade no validacao.js.

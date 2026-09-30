@@ -1,0 +1,44 @@
+# Deploy automático no GitHub Pages a cada merge na main (EP IV)
+name: Deploy no GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:   # permite rodar na mão pela aba Actions
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v7
+      - name: Instalar o Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: lts/*
+          cache: "npm"
+      - name: Instalar dependências
+        run: npm ci
+      - name: Gerar o build (minificação)
+        run: npm run build
+      - name: Configurar o Pages
+        uses: actions/configure-pages@v6
+      - name: Enviar a pasta dist
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: "./dist"
+      - name: Publicar
+        id: deployment
+        uses: actions/deploy-pages@v5
